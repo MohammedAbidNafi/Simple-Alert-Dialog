@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="item_color">#0064CF</color>
+    <color name="cancel_colour">#FF1919</color>
+    <color name="card_back">#fff</color>
+    <color name="black_text">#000</color>
+    <color name="greytext">#616161</color>
+    <color name="sperator">#DDDDDD</color>
+</resources>
