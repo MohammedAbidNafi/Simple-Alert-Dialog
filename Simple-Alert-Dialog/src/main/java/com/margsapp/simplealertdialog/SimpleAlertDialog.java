@@ -176,6 +176,15 @@ public class SimpleAlertDialog {
             LinearLayout layout;
 
 
+
+            dialog = new Dialog(context.get());
+            dialog.getWindow().setGravity(Gravity.CENTER);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.setCancelable(cancel);
+            dialog.setContentView(R.layout.alert_dialog);
+
+
             layout = dialog.findViewById(R.id.layout);
             Title = dialog.findViewById(R.id.title);
             Description = dialog.findViewById(R.id.description);
@@ -237,12 +246,6 @@ public class SimpleAlertDialog {
                     }
                 });
             }
-            dialog = new Dialog(context.get());
-            dialog.getWindow().setGravity(Gravity.CENTER);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.setCancelable(cancel);
-            dialog.setContentView(R.layout.alert_dialog);
 
 
             Window window = dialog.getWindow();
