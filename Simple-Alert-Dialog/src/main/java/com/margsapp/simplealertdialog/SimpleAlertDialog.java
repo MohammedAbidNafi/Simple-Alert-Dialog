@@ -173,7 +173,7 @@ public class SimpleAlertDialog {
 
             TextView Title,Description;
             AppCompatButton pBtn,nBtn;
-            LinearLayout layout;
+            CardView card;
 
 
 
@@ -185,7 +185,7 @@ public class SimpleAlertDialog {
             dialog.setContentView(R.layout.alert_dialog);
 
 
-            layout = dialog.findViewById(R.id.layout);
+            card = dialog.findViewById(R.id.card);
             Title = dialog.findViewById(R.id.title);
             Description = dialog.findViewById(R.id.description);
             pBtn = dialog.findViewById(R.id.pBtn);
@@ -200,7 +200,7 @@ public class SimpleAlertDialog {
             }
 
             if(backColor != 0){
-                layout.setBackgroundColor(backColor);
+                card.setCardBackgroundColor(backColor);
             }
 
             if (pBtnColor != 0) {
