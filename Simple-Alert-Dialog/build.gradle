@@ -26,6 +26,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
 
 }
 
@@ -33,11 +40,11 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                from components.release
+                components.getByName('release')
 
                 groupId = 'com.github.MohammedAbidNafi'
                 artifactId = 'simple-alert-dialog'
-                version = '1.0.0'
+                version = '1.1'
             }
         }
     }
