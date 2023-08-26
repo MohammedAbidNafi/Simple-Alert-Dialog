@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -27,7 +28,9 @@ public class SimpleAlertDialog {
     private int visibility;
     private SimpleAlertDialogListener pListener,nListener;
     @ColorInt
-    private int pBtnColor,pBtnTxtColor, nBtnColor,nBtnTxtColor,backColor,titleColor,descColor;
+    private int pBtnTxtColor,nBtnTxtColor,titleColor,descColor;
+
+    Drawable pBtnBack,nBtnBack,back;
 
 
     private boolean cancel;
@@ -44,11 +47,11 @@ public class SimpleAlertDialog {
         this.nListener = builder.nListener;
         this.cancel = builder.cancel;
         this.dialog = builder.dialog;
-        this.pBtnColor = builder.pBtnColor;
+        this.pBtnBack = builder.pBtnBack;
         this.pBtnTxtColor = builder.pBtnTxtColor;
-        this.nBtnColor = builder.nBtnColor;
+        this.nBtnBack = builder.nBtnBack;
         this.nBtnTxtColor = builder.nBtnTxtColor;
-        this.backColor = builder.backColor;
+        this.back = builder.back;
         this.titleColor = builder.titleColor;
         this.descColor = builder.descColor;
     }
@@ -72,10 +75,13 @@ public class SimpleAlertDialog {
         private SimpleAlertDialogListener pListener, nListener;
 
         @ColorInt int pBtnColor;
+        Drawable pBtnBack;
         @ColorInt int pBtnTxtColor;
         @ColorInt int nBtnColor;
+        Drawable nBtnBack;
         @ColorInt int nBtnTxtColor;
-        @ColorInt int backColor;
+
+        Drawable back;
         @ColorInt int titleColor;
         @ColorInt int descColor;
 
@@ -114,8 +120,8 @@ public class SimpleAlertDialog {
             return this;
         }
 
-        public Builder setPositiveButtonColor(@ColorInt int pBtnColor){
-            this.pBtnColor = pBtnColor;
+        public Builder setPositiveButtonBack(Drawable pBtnBack){
+            this.pBtnBack = pBtnBack;
             return this;
         }
 
@@ -124,8 +130,8 @@ public class SimpleAlertDialog {
             return this;
         }
 
-        public Builder setNegativeButtonColor(@ColorInt int nBtnColor){
-            this.nBtnColor = nBtnColor;
+        public Builder setNegativeButtonBack(Drawable nBtnBack){
+            this.nBtnBack = nBtnBack;
             return this;
         }
 
@@ -144,8 +150,8 @@ public class SimpleAlertDialog {
             return this;
         }
 
-        public Builder setBackgroundColor(@ColorInt int backColor){
-            this.backColor = backColor;
+        public Builder setBackground(Drawable back){
+            this.back = back;
             return this;
         }
 
@@ -173,11 +179,12 @@ public class SimpleAlertDialog {
 
             TextView Title,Description;
             AppCompatButton pBtn,nBtn;
-            CardView card;
-
+            LinearLayout layout;
 
 
             dialog = new Dialog(context.get());
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
             dialog.getWindow().setGravity(Gravity.CENTER);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -185,7 +192,7 @@ public class SimpleAlertDialog {
             dialog.setContentView(R.layout.alert_dialog);
 
 
-            card = dialog.findViewById(R.id.card);
+            layout = dialog.findViewById(R.id.layout);
             Title = dialog.findViewById(R.id.title);
             Description = dialog.findViewById(R.id.description);
             pBtn = dialog.findViewById(R.id.pBtn);
@@ -199,13 +206,13 @@ public class SimpleAlertDialog {
                 Description.setText(descriptionTxt);
             }
 
-            if(backColor != 0){
-                card.setCardBackgroundColor(backColor);
-            }
 
-            if (pBtnColor != 0) {
-                pBtn.setBackgroundColor(pBtnColor);
-            }
+            layout.setBackground(back);
+
+
+
+            pBtn.setBackgroundDrawable(pBtnBack);
+
 
             if(pBtnTxtColor != 0){
                 pBtn.setTextColor(pBtnTxtColor);
@@ -215,9 +222,9 @@ public class SimpleAlertDialog {
                 pBtn.setText(pTxt);
             }
 
-            if (nBtnColor != 0) {
-                nBtn.setBackgroundColor(pBtnColor);
-            }
+
+            nBtn.setBackgroundDrawable(nBtnBack);
+
 
             if(nBtnTxtColor != 0){
                 nBtn.setTextColor(nBtnTxtColor);
@@ -248,8 +255,8 @@ public class SimpleAlertDialog {
             }
 
 
-            Window window = dialog.getWindow();
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+            dialog.show();
 
 
             return new SimpleAlertDialog(this);
